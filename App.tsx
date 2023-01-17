@@ -22,8 +22,10 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <Text style={styles.text}>
+        Open up App.tsx to start working on your app!
+      </Text>
+      <StatusBar style="light" translucent />
     </View>
   );
 }
@@ -34,5 +36,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#09090A',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  text: {
+    color: '#FFFFFF',
+    fontFamily: 'Inter_400Regular',
   },
 });
