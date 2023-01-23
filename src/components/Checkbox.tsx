@@ -27,7 +27,7 @@ export default function Checkbox({
         <View className="h-8 w-8 bg-zinc-900 rounded-lg" />
       )}
 
-      <Text className="text-white text-base ml-3">{title}</Text>
+      <Text className="text-white text-base font-semibold ml-3">{title}</Text>
     </TouchableOpacity>
   );
 }
