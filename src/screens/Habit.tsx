@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
 import { Alert, ScrollView, Text, View } from 'react-native';
@@ -33,6 +34,7 @@ export default function Habit() {
   const { date } = route.params as HabitParams;
 
   const parsedDate = dayjs(date);
+  const isDateInPast = parsedDate.endOf('day').isBefore(new Date());
   const dayOfWeek = parsedDate.format('dddd');
   const dayAndMonth = parsedDate.format('DD/MM');
 
@@ -92,16 +94,27 @@ export default function Habit() {
 
         <ProgressBar progress={habitsProgress} />
 
-        <View className="mt-6">
+        <View
+          className={clsx('mt-6', {
+            'opacity-50': isDateInPast,
+          })}
+        >
           {dayInfo?.possibleHabits?.map((habit) => (
             <Checkbox
               key={habit.id}
               title={habit.title}
               checked={completedHabits.includes(habit.id)}
               onPress={() => handleToggleHabit(habit.id)}
+              disabled={isDateInPast}
             />
           )) ?? <HabitsEmpty />}
         </View>
+
+        {isDateInPast && (
+          <Text className="text-gray-300 mt-10 text-center">
+            Você não pode atualizar hábitos antigos
+          </Text>
+        )}
       </ScrollView>
     </View>
   );
